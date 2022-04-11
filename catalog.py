@@ -46,7 +46,7 @@ def search_by_topic(topic):
     else: 
         return jsonify({topic: "this topic does not exist "})
 
-#2:info 
+#2info 
 @app.route("/info/<bookID>", methods=['GET'])
 def get_info_forID(bookID):
     book = Catalog_Server_DB.query.with_entities(Catalog_Server_DB.title,Catalog_Server_DB.topic,Catalog_Server_DB.quantity,Catalog_Server_DB.price).filter_by(id = bookID).first()
