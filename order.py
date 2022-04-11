@@ -14,23 +14,23 @@ app = Flask(__name__)
 
 
 #purchase 
-# if client send purchase with a specific book_id
-#order server send to catalog server
+# if client send purchase with a specific book_id then order server send to catalog server
+
 @app.route('/purchase/<int:bookID>', methods=['PUT'])
 def purchase_book(bookID):
-    result=request.put("http://192.168.1.60:5000/decrease_quantity/"+str(bookID),{'new_amount':1})
-    x=result.json()
-    msg= str(x.get('msg'))
-    print(msg,end=' , ')
+    re=request.put("http://172.16.224.195:5000/decrease_quantity/"+str(bookID),{'new_amount':16})
+    x=re.json()
+    message= str(x.get('message'))
+    
 
-    if msg == 'None'  or msg.find("enough")!=-1:
-        print("hi")
-        return(result.content)
+    if message.find("enough")!=-1:
+      
+        return(re.content)
     else: 
-        print("noo")
-        result2=request.get("http://192.168.1.60:5000/info/"+str(bookID))
-        info=result2.json()
-        return {"msg":f"bought book '{info.get('title')}'"}
+        
+        re2=request.get("http://172.16.224.195:5000/info/"+str(bookID))
+        info=re2.json()
+        return {"message":f"bought book '{info.get('title')}'"}
       
 
 
