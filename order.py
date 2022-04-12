@@ -34,6 +34,6 @@ def purchase_book(bookID):
       
 
 
-#run the prog
+#run
 if __name__=="__main__":
     app.run(debug=True)
